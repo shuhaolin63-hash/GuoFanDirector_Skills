@@ -1,0 +1,294 @@
+# ============================================================================
+# 全局参数配置
+# 郭帆导演工作室 — 竖屏短剧项目
+# ============================================================================
+# 本文件定义所有短剧项目共享的全局参数。
+# 各项目可在项目级配置中覆盖部分参数，但需注明"覆盖"。
+# ============================================================================
+
+---
+project:
+  name: "全局参数配置"
+  version: "V1.0"
+  date: "2026-07-20"
+  description: "竖屏短剧全局参数配置标准"
+---
+
+# ============================================================================
+# 1. 画质参数
+# ============================================================================
+quality:
+  resolution: "8K超清"                          # 输出分辨率标准（7680x4320 或下采样至 4K）
+  color_depth: "10-bit"                         # 色深标准
+  color_space: "Rec.2020"                       # 色彩空间
+  frame_rate: 30                                # 帧率（fps）
+  
+  film_texture:
+    enabled: true                               # 启用胶片质感
+    grain_intensity: 15                         # 颗粒感强度（0-100）
+    grain_size: "fine"                          # 颗粒大小：fine/medium/coarse
+    film_curve: "S-curve"                       # 胶片曲线类型
+    
+  texture_quality:
+    skin_texture: "real"                        # 皮肤纹理：real（真实）/ smooth（磨皮）
+    fabric_detail: true                         # 布料细节保留
+    ambient_occlusion: true                     # 环境光遮蔽开启
+    sharpness: 85                               # 锐度（0-100）
+    
+  forbidden:
+    - "磨皮美颜"                                # 禁止磨皮效果
+    - "过度柔光"                                # 禁止过度柔光
+    - "过度降噪"                                # 禁止过度降噪导致纹理丢失
+    - "HDR过曝"                                 # 禁止 HDR 过曝
+    - "肤色统一化"                              # 禁止肤色统一化处理
+
+# ============================================================================
+# 2. 色调模板参数
+# ============================================================================
+color_grading:
+  
+  # --- 模板 A：冷峻都市（悬疑/逆袭/战神） ---
+  template_A:
+    name: "冷峻都市"
+    genre: ["悬疑", "逆袭", "战神", "商战"]
+    params:
+      color_temperature: 5800                   # 色温（K），偏冷
+      tint_shift: -10                           # 色调偏移（负数=绿色偏移）
+      contrast: 35                              # 对比度（0-100）
+      highlights: -15                           # 高光调整
+      shadows: -20                              # 阴影调整
+      saturation: -15                           # 饱和度调整
+      vibrance: -10                             # 自然饱和度
+      vignette: 30                              # 暗角强度（0-100）
+      skin_tone_shift: "cool"                   # 肤色偏移方向
+      skin_blue_offset: 5                       # 肤色蓝偏移量
+      lift:
+        red: -2
+        green: -1
+        blue: 3
+      gamma:
+        red: 0
+        green: 0
+        blue: 1
+      gain:
+        red: -1
+        green: 0
+        blue: 2
+      
+  # --- 模板 B：暖甜恋语（甜宠/情感/生活） ---
+  template_B:
+    name: "暖甜恋语"
+    genre: ["甜宠", "情感", "生活", "青春"]
+    params:
+      color_temperature: 5000                   # 色温（K），偏暖
+      tint_shift: 5                             # 色调偏移（正数=品红偏移）
+      contrast: 20                              # 对比度（0-100）
+      highlights: 10                            # 高光调整（过曝柔光效果）
+      shadows: 15                               # 阴影调整
+      saturation: 10                            # 饱和度调整
+      vibrance: 15                              # 自然饱和度
+      vignette: 15                              # 暗角强度（0-100）
+      skin_tone_shift: "warm"                   # 肤色偏移方向
+      soft_glow:
+        enabled: true                           # 高光柔光效果
+        intensity: 10                           # 柔光强度
+        sharpness_reduction: 10                 # 锐度降低量
+      lift:
+        red: 2
+        green: 0
+        blue: -1
+        
+  # --- 模板 C：复古胶片（年代/穿越/文艺） ---
+  template_C:
+    name: "复古胶片"
+    genre: ["年代", "穿越", "文艺", "怀旧"]
+    params:
+      color_temperature: 5400                   # 色温（K），中性略暖
+      tint_shift: 8                             # 色调偏移（品红偏移）
+      contrast: 40                              # 对比度（0-100），高对比
+      highlights: -20                           # 高光压缩
+      shadows: -30                              # 阴影压缩
+      saturation: -25                           # 低饱和度
+      vibrance: -20                             # 自然饱和度
+      vignette: 25                              # 暗角强度（0-100）
+      grain:
+        intensity: 35                           # 颗粒感强度（0-100）
+        size: "medium"                          # 颗粒大小
+      film_curve: "S-curve"                     # S 曲线：阴影+高光双向压缩
+      lift:
+        red: 3
+        green: 0
+        blue: -2
+      gamma:
+        red: 1
+        green: 0
+        blue: -1
+      gain:
+        red: -2
+        green: -1
+        blue: 1
+
+# ============================================================================
+# 3. 景别配比参数
+# ============================================================================
+shot_ratio:
+  description: "每集景别占比标准（严格控制）"
+  rules:
+    - shot_type: "近景（JT）"
+      min_percent: 60                           # 近景 ≥ 60%
+      max_percent: 75
+      note: "竖屏核心叙事景别"
+      
+    - shot_type: "特写（TX + XJ）"
+      min_percent: 20                           # 特写 20-30%
+      max_percent: 30
+      note: "情绪和细节强化"
+      
+    - shot_type: "中景（ZJ）"
+      min_percent: 10                           # 中景 10-15%
+      max_percent: 15
+      note: "环境关系交代"
+      
+    - shot_type: "全景（QJ）+ 远景（YT）"
+      min_percent: 0                            # 全景+远景 ≤ 5%
+      max_percent: 5
+      note: "每集全景 ≤ 2个，远景 ≤ 1个"
+      
+  enforcement: "hard"                           # hard=强制约束 / soft=建议约束
+
+# ============================================================================
+# 4. 节奏参数
+# ============================================================================
+rhythm:
+  hook:
+    timing: "3秒"                               # 开场钩子必须在 3 秒内出现
+    type: "视觉冲击/台词悬念/音效突转"           # 钩子类型
+    
+  wave:
+    interval_min: 15                            # 节奏波动最小间隔（秒）
+    interval_max: 20                            # 节奏波动最大间隔（秒）
+    wave_types:                                 # 波动类型
+      - "加速"                                  # 台词对切加快、动作密度增加
+      - "减速"                                  # 静默、慢镜头、长停顿
+      - "骤停"                                  # 动作静止或台词中断
+      - "反转"                                  # 立场/情绪/情境翻转
+      - "悬念"                                  # 话说到一半、发现某物
+      
+  episode_end:
+    cliffhanger: true                           # 每集结尾必须留悬念
+    pause_duration: 1.5                         # 结尾定格拉长（秒）
+    sound_continuation: true                    # 音效延续至黑场
+
+# ============================================================================
+# 5. 台词参数
+# ============================================================================
+dialogue:
+  max_length_per_line: 15                       # 单句台词最大字数（含标点）
+  action_to_dialogue_ratio: "3:1"               # 每 3 句动作描写配 1 句台词
+  pause_notation:
+    short: "/"                                  # 短停顿 0.5 秒
+    medium: "//"                                # 中停顿 1 秒
+    long: "///"                                 # 长停顿 1.5-2.5 秒
+    
+  forbidden_patterns:                           # 禁止的台词模式
+    - "书面语化台词"                            # 如"我确实没有什么想要说的了"
+    - "超长单句"                                # 连续超过 15 字不拆分
+    - "过度解释性台词"                          # 如"你难道不知道……"
+    
+  dialogue_density:
+    max_per_scene: 12                           # 每场最多台词句数
+    max_continuous: 5                           # 连续台词对切最多 5 句，之后需插入动作
+
+# ============================================================================
+# 6. 人物绑定参数
+# ============================================================================
+character_binding:
+  # 人物四要素默认值
+  default_profile:
+    name: ""                                    # 人物姓名
+    archetype: ""                               # 人物类型（总裁/女主/反派/配角）
+    voice_profile:                              # 声音特征（详情见音频模板）
+      timbre: ""                                # 音色
+      speed_range: ""                           # 语速范围
+      resonance: ""                             # 共鸣位置
+    expression_range:                           # 表情特征
+      baseline: ""                              # 基准表情
+      micro_expressions: []                     # 标志性微表情列表
+      
+  element_count: 4                              # 人物绑定四要素
+  elements:
+    - "人物姓名"                                # 要素 1：姓名
+    - "人物类型标签"                            # 要素 2：类型（总裁/女主/反派/配角/长辈）
+    - "声音特征档案"                            # 要素 3：声音特征（引用音频模板人物标签卡）
+    - "微表情特征库"                            # 要素 4：标志性微表情（用于情感标注一致性）
+    
+  character_count_per_episode:
+    main: 2                                     # 每集核心人物 ≤ 2 人
+    supporting: 3                               # 每集次要人物 ≤ 3 人
+    total: 5                                    # 每集出场人物总数 ≤ 5 人
+
+# ============================================================================
+# 7. 画幅参数
+# ============================================================================
+aspect_ratio:
+  canvas: "9:16"                                # 竖屏画幅比例
+  resolution:
+    width: 1080                                 # 宽度（px）
+    height: 1920                                # 高度（px）
+    
+  safe_area:
+    top_margin_ratio: 0.05                      # 上安全区留白比例（画面高度的 5%）
+    bottom_margin_ratio: 0.10                   # 下安全区留白比例（画面高度的 10%）
+    left_margin_ratio: 0.03                     # 左侧安全区
+    right_margin_ratio: 0.03                    # 右侧安全区
+    
+  face_position:
+    vertical_ratio: 0.33                        # 人脸位于画面垂直方向 1/3 处
+    headroom_ratio: 0.20                        # 头顶留白 ≤ 画面高度的 1/5
+    
+  action_area:
+    center_width_ratio: 0.70                    # 核心动作区域宽度占比
+    center_height_ratio: 0.60                   # 核心动作区域高度占比
+    position: "middle_center"                   # 核心动作区域位置（居中）
+
+# ============================================================================
+# 8. 时长与集数参数
+# ============================================================================
+episode:
+  duration:
+    min_seconds: 60                             # 单集最小时长（秒）
+    max_seconds: 90                             # 单集最大时长（秒）
+    target_seconds: 75                          # 单集目标时长（秒）
+    
+  shots_per_episode:
+    min: 20                                     # 每集最少镜头数
+    max: 35                                     # 每集最多镜头数
+    target: 28                                  # 每集目标镜头数
+    
+  total_episodes:
+    min: 60                                     # 整剧最少集数
+    max: 100                                    # 整剧最多集数
+    typical: 80                                 # 典型集数
+    
+  production:
+    shots_per_day: 40                           # 日拍镜头数
+    episodes_per_day: 1.5                       # 日拍集数
+
+# ============================================================================
+# 9. 文件命名与路径参数
+# ============================================================================
+file_naming:
+  convention: "[类型前缀]_[项目名]_[集数].[ext]"
+  path_structure:
+    root: "assets/"
+    scripts: "assets/scripts/"                  # 剧本目录
+    storyboards: "assets/storyboards/"          # 分镜目录
+    audio: "assets/audio/"                      # 音频目录
+    covers: "assets/covers/"                    # 封面目录
+    exports: "assets/exports/"                  # 导出目录
+    
+  types:
+    script: "剧本"                              # 剧本类型前缀
+    storyboard: "分镜"                          # 分镜类型前缀
+    audio: "音频"                               # 音频配置类型前缀
+    cover: "封面"                               # 封面配置类型前缀
