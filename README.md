@@ -1,5 +1,14 @@
 # 郭帆导演 Skills — 你的短剧创作全流程 AI 工坊
 
+![GitHub labels](https://img.shields.io/github/labels/shuhaolin63-hash/GuoFanDirector_Skills/type%3A%20skill?label=type%3A%20skill&color=0052cc)
+![GitHub labels](https://img.shields.io/github/labels/shuhaolin63-hash/GuoFanDirector_Skills/type%3A%20prompt?label=type%3A%20prompt&color=0075ca)
+![GitHub labels](https://img.shields.io/github/labels/shuhaolin63-hash/GuoFanDirector_Skills/type%3A%20agent?label=type%3A%20agent&color=006b75)
+![GitHub labels](https://img.shields.io/github/labels/shuhaolin63-hash/GuoFanDirector_Skills/module%3A%20script-agent?label=script-agent&color=c5def5)
+![GitHub labels](https://img.shields.io/github/labels/shuhaolin63-hash/GuoFanDirector_Skills/module%3A%20storyboard-agent?label=storyboard-agent&color=7fc8f8)
+![GitHub labels](https://img.shields.io/github/labels/shuhaolin63-hash/GuoFanDirector_Skills/module%3A%20audio-agent?label=audio-agent&color=4db6ac)
+![GitHub labels](https://img.shields.io/github/labels/shuhaolin63-hash/GuoFanDirector_Skills/module%3A%20cover-agent?label=cover-agent&color=80deea)
+![GitHub labels](https://img.shields.io/github/labels/shuhaolin63-hash/GuoFanDirector_Skills/module%3A%20orchestrator?label=orchestrator&color=b3e5fc)
+
 🎓 MIT License · AgentSkills · ⭐ 已就绪
 
 SOLO · Claude Code · Hermes · Codex
